@@ -3,10 +3,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Link } from "@tanstack/react-router";
 import {
+  AlertTriangle,
+  ArrowRight,
   Bell,
+  CalendarDays,
   Download,
   FileText,
   Home as HomeIcon,
+  Info,
   LayoutGrid,
   MapPin,
   Phone,
@@ -75,6 +79,30 @@ const LATEST_NEWS = [
   },
 ];
 
+const CATEGORY_ACCENT: Record<string, string> = {
+  Alert: "border-red-500 bg-red-50",
+  Event: "border-green-500 bg-green-50",
+  General: "border-blue-500 bg-blue-50",
+};
+
+const CATEGORY_DOT: Record<string, string> = {
+  Alert: "bg-red-500",
+  Event: "bg-green-500",
+  General: "bg-blue-500",
+};
+
+const CATEGORY_ICON: Record<string, React.ElementType> = {
+  Alert: AlertTriangle,
+  Event: CalendarDays,
+  General: Info,
+};
+
+const CATEGORY_ICON_COLOR: Record<string, string> = {
+  Alert: "text-red-500",
+  Event: "text-green-600",
+  General: "text-blue-500",
+};
+
 export function Home() {
   const { data: notifications, isLoading: notifLoading } = useNotifications();
   const { data: villageInfo, isLoading: infoLoading } = useVillageInfo();
@@ -104,10 +132,17 @@ export function Home() {
     },
     {
       label: "वार्ड | Wards",
-      value: villageInfo ? Number(villageInfo.wards).toString() : "9",
+      value: villageInfo ? Number(villageInfo.wards).toString() : "11",
       icon: LayoutGrid,
       color: "text-nav-orange",
     },
+  ];
+
+  const displayNotifications = notifications?.slice(0, 4) ?? [
+    { title: "बैठक सूचना — 25 मार्च", category: "Alert" },
+    { title: "PM आवास आवेदन खुले", category: "General" },
+    { title: "होली उत्सव — 14 मार्च", category: "Event" },
+    { title: "वार्ड सभा 20 मार्च को", category: "Alert" },
   ];
 
   return (
@@ -280,58 +315,93 @@ export function Home() {
               </Card>
             </motion.div>
 
+            {/* ── MODERN NOTIFICATIONS PANEL ── */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.35 }}
             >
               <Card
-                className="shadow-card"
+                className="shadow-card overflow-hidden border-0"
                 data-ocid="home.notifications.panel"
               >
-                <div className="bg-nav-blue px-4 py-2">
-                  <h3 className="text-white font-bold text-sm">
-                    सूचनाएं | Notifications
-                  </h3>
+                {/* Header */}
+                <div className="bg-gradient-to-r from-nav-blue to-blue-700 px-4 py-3 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <div className="relative">
+                      <Bell size={16} className="text-white" />
+                      <span className="absolute -top-1 -right-1 w-2 h-2 bg-yellow-400 rounded-full animate-ping" />
+                      <span className="absolute -top-1 -right-1 w-2 h-2 bg-yellow-400 rounded-full" />
+                    </div>
+                    <h3 className="text-white font-bold text-sm tracking-wide">
+                      ताज़ा सूचनाएं | Notifications
+                    </h3>
+                  </div>
+                  <span className="bg-white/20 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                    {displayNotifications.length}
+                  </span>
                 </div>
-                <CardContent className="pt-3 pb-3">
+
+                {/* Items */}
+                <CardContent className="pt-3 pb-3 px-3">
                   {notifLoading ? (
                     <div
                       className="space-y-2"
                       data-ocid="home.notifications.loading_state"
                     >
                       {[1, 2, 3].map((i) => (
-                        <Skeleton key={i} className="h-10" />
+                        <Skeleton key={i} className="h-12" />
                       ))}
                     </div>
                   ) : (
                     <ul className="space-y-2">
-                      {(
-                        notifications?.slice(0, 4) ?? [
-                          { title: "बैठक सूचना — 25 मार्च", category: "Alert" },
-                          { title: "PM आवास आवेदन खुले", category: "General" },
-                          { title: "होली उत्सव — 14 मार्च", category: "Event" },
-                        ]
-                      ).map((n, i) => (
-                        <li
-                          key={n.title}
-                          className="flex items-start gap-2 text-xs"
-                          data-ocid={`home.notification.item.${i + 1}`}
-                        >
-                          <span className="bg-nav-orange/10 text-nav-orange font-bold px-1.5 py-0.5 rounded text-xs flex-shrink-0">
-                            {n.category}
-                          </span>
-                          <span className="font-devanagari">{n.title}</span>
-                        </li>
-                      ))}
+                      {displayNotifications.map((n, i) => {
+                        const CatIcon = CATEGORY_ICON[n.category] ?? Info;
+                        const accentClass =
+                          CATEGORY_ACCENT[n.category] ??
+                          "border-gray-400 bg-gray-50";
+                        const dotClass =
+                          CATEGORY_DOT[n.category] ?? "bg-gray-400";
+                        const iconColor =
+                          CATEGORY_ICON_COLOR[n.category] ?? "text-gray-500";
+                        return (
+                          <motion.li
+                            key={n.title}
+                            initial={{ opacity: 0, x: -8 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.35 + i * 0.07 }}
+                            className={`flex items-start gap-2.5 rounded-lg border-l-4 px-3 py-2.5 hover:brightness-95 transition-all cursor-default ${accentClass}`}
+                            data-ocid={`home.notification.item.${i + 1}`}
+                          >
+                            <CatIcon
+                              size={14}
+                              className={`mt-0.5 flex-shrink-0 ${iconColor}`}
+                            />
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs font-semibold font-devanagari leading-snug text-foreground line-clamp-2">
+                                {n.title}
+                              </p>
+                            </div>
+                            <span
+                              className={`w-2 h-2 rounded-full flex-shrink-0 mt-1 ${i === 0 ? `${dotClass} animate-pulse` : dotClass}`}
+                            />
+                          </motion.li>
+                        );
+                      })}
                     </ul>
                   )}
+
+                  {/* View All Button */}
                   <Link
                     to="/notifications"
-                    className="block text-center text-xs text-nav-blue mt-3 font-semibold hover:underline"
                     data-ocid="home.notifications.link"
+                    className="mt-3 flex items-center justify-center gap-1.5 w-full rounded-lg border border-nav-blue/30 bg-blue-50 hover:bg-nav-blue hover:text-white text-nav-blue text-xs font-semibold py-2 transition-all group"
                   >
-                    सभी देखें | View All →
+                    <span>सभी देखें | View All</span>
+                    <ArrowRight
+                      size={13}
+                      className="group-hover:translate-x-0.5 transition-transform"
+                    />
                   </Link>
                 </CardContent>
               </Card>

@@ -10,6 +10,7 @@ import {
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { NotificationTicker } from "./components/NotificationTicker";
+import { WelcomePopup } from "./components/WelcomePopup";
 import { About } from "./pages/About";
 import { Contact } from "./pages/Contact";
 import { Downloads } from "./pages/Downloads";
@@ -30,6 +31,7 @@ const rootRoute = createRootRoute({
         </div>
         <Footer />
       </div>
+      <WelcomePopup />
       <Toaster richColors />
     </QueryClientProvider>
   ),

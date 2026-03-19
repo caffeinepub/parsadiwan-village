@@ -54,7 +54,7 @@ const WARD_MEMBERS = [
   },
   {
     name: "श्री दिनेश यादव | Shri Dinesh Yadav",
-    ward: "9",
+    ward: "11",
     role: "पंच | Panch",
     phone: "9876543222",
   },
@@ -136,7 +136,7 @@ export function About() {
                     },
                     {
                       label: "जिला | District",
-                      value: villageInfo?.district ?? "Lucknow",
+                      value: villageInfo?.district ?? "Siddharthnagar",
                     },
                     {
                       label: "राज्य | State",
@@ -164,7 +164,7 @@ export function About() {
                       label: "वार्ड | Wards",
                       value: villageInfo
                         ? Number(villageInfo.wards).toString()
-                        : "9",
+                        : "11",
                     },
                   ].map((row) => (
                     <tr key={row.label}>

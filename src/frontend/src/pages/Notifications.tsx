@@ -1,9 +1,8 @@
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Bell } from "lucide-react";
-import { motion } from "motion/react";
+import { AlertTriangle, Bell, CalendarDays, Info } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import { useNotifications } from "../hooks/useQueries";
 
@@ -51,10 +50,52 @@ const FALLBACK = [
 ];
 
 const CATEGORIES = ["All", "Alert", "Event", "General"];
-const CATEGORY_COLORS: Record<string, string> = {
-  Alert: "bg-red-100 text-red-700 border-red-200",
-  Event: "bg-green-100 text-green-700 border-green-200",
-  General: "bg-blue-100 text-blue-700 border-blue-200",
+
+const CATEGORY_META: Record<
+  string,
+  {
+    icon: React.ElementType;
+    border: string;
+    bg: string;
+    badge: string;
+    dot: string;
+    label: string;
+  }
+> = {
+  Alert: {
+    icon: AlertTriangle,
+    border: "border-l-red-500",
+    bg: "bg-red-50",
+    badge: "bg-red-100 text-red-700 border-red-300",
+    dot: "bg-red-500",
+    label: "⚠ Alert",
+  },
+  Event: {
+    icon: CalendarDays,
+    border: "border-l-green-500",
+    bg: "bg-green-50",
+    badge: "bg-green-100 text-green-700 border-green-300",
+    dot: "bg-green-500",
+    label: "📅 Event",
+  },
+  General: {
+    icon: Info,
+    border: "border-l-blue-500",
+    bg: "bg-blue-50",
+    badge: "bg-blue-100 text-blue-700 border-blue-300",
+    dot: "bg-blue-500",
+    label: "ℹ General",
+  },
+};
+
+const FILTER_ACTIVE_STYLES: Record<string, string> = {
+  All: "bg-gradient-to-r from-nav-orange to-orange-500 text-white shadow-md shadow-orange-200",
+  Alert:
+    "bg-gradient-to-r from-red-500 to-rose-500 text-white shadow-md shadow-red-200",
+  Event:
+    "bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-md shadow-green-200",
+  General:
+    "bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-md shadow-blue-200",
 };
 
 function formatDate(date: bigint): string {
@@ -75,100 +116,208 @@ export function Notifications() {
     filter === "All" ? items : items.filter((n) => n.category === filter);
 
   return (
-    <main className="max-w-4xl mx-auto px-4 py-8">
-      <motion.div
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-      >
-        <h1 className="text-2xl font-bold font-devanagari mb-1">सूचनाएं</h1>
-        <div className="text-muted-foreground mb-4">
-          Notifications — Alerts, Events &amp; Announcements
-        </div>
-      </motion.div>
+    <main>
+      {/* Hero Header */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-nav-blue via-blue-700 to-indigo-800 py-10 px-4">
+        {/* decorative circles */}
+        <div className="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-white/5" />
+        <div className="absolute bottom-0 left-10 w-32 h-32 rounded-full bg-white/5" />
 
-      <div
-        className="flex gap-2 mb-6 flex-wrap"
-        data-ocid="notifications.filter.tab"
-      >
-        {CATEGORIES.map((cat) => (
-          <Button
-            key={cat}
-            variant={filter === cat ? "default" : "outline"}
-            size="sm"
-            onClick={() => setFilter(cat)}
-            data-ocid={`notifications.filter.${cat.toLowerCase()}.button`}
-            className={
-              filter === cat ? "bg-nav-orange text-white border-nav-orange" : ""
-            }
+        <div className="max-w-4xl mx-auto relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: -16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55 }}
+            className="flex items-center gap-4"
           >
-            {cat}
-          </Button>
-        ))}
-      </div>
-
-      {isLoading ? (
-        <div className="space-y-3" data-ocid="notifications.loading_state">
-          {[1, 2, 3, 4].map((i) => (
-            <Skeleton key={i} className="h-24" />
-          ))}
-        </div>
-      ) : filtered.length === 0 ? (
-        <Card data-ocid="notifications.empty_state">
-          <CardContent className="py-12 text-center text-muted-foreground">
-            <Bell size={40} className="mx-auto mb-3 opacity-30" />
-            कोई सूचना नहीं | No notifications found
-          </CardContent>
-        </Card>
-      ) : (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="space-y-3"
-          data-ocid="notifications.list"
-        >
-          {filtered.map((n, i) => (
             <motion.div
-              key={n.title}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.05 }}
+              animate={{ rotate: [0, -12, 12, -8, 8, 0] }}
+              transition={{
+                repeat: Number.POSITIVE_INFINITY,
+                repeatDelay: 4,
+                duration: 0.8,
+              }}
+              className="bg-white/15 backdrop-blur p-3 rounded-2xl"
             >
-              <Card
-                className="shadow-card"
-                data-ocid={`notifications.item.${i + 1}`}
-              >
-                <CardContent className="py-4">
-                  <div className="flex items-start gap-3">
-                    <Bell
-                      size={18}
-                      className="text-nav-orange mt-0.5 flex-shrink-0"
-                    />
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 flex-wrap mb-1">
-                        <span className="font-bold text-sm font-devanagari">
-                          {n.title}
-                        </span>
-                        <Badge
-                          variant="outline"
-                          className={`text-xs ${CATEGORY_COLORS[n.category] ?? ""}`}
-                        >
-                          {n.category}
-                        </Badge>
-                      </div>
-                      <p className="text-sm text-muted-foreground font-devanagari">
-                        {n.message}
-                      </p>
-                      <div className="text-xs text-muted-foreground mt-1">
-                        {formatDate(n.date)}
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+              <Bell size={32} className="text-white" />
             </motion.div>
+            <div>
+              <h1 className="text-2xl md:text-3xl font-bold text-white font-devanagari leading-tight">
+                सूचनाएं
+              </h1>
+              <p className="text-blue-200 text-sm mt-0.5">
+                Notifications — Alerts, Events &amp; Announcements
+              </p>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="mt-5 flex flex-wrap gap-3"
+          >
+            {["Alert", "Event", "General"].map((cat) => (
+              <div
+                key={cat}
+                className="flex items-center gap-1.5 bg-white/10 rounded-full px-3 py-1"
+              >
+                <span
+                  className={`w-2 h-2 rounded-full ${CATEGORY_META[cat].dot}`}
+                />
+                <span className="text-white/80 text-xs font-medium">{cat}</span>
+                <span className="text-white/60 text-xs">
+                  ({items.filter((n) => n.category === cat).length})
+                </span>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      <div className="max-w-4xl mx-auto px-4 py-8">
+        {/* Filter pills */}
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="flex gap-2 mb-7 flex-wrap"
+          data-ocid="notifications.filter.tab"
+        >
+          {CATEGORIES.map((cat) => (
+            <button
+              key={cat}
+              type="button"
+              onClick={() => setFilter(cat)}
+              data-ocid={`notifications.filter.${cat.toLowerCase()}.button`}
+              className={`relative px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
+                filter === cat
+                  ? FILTER_ACTIVE_STYLES[cat]
+                  : "bg-white border border-border text-muted-foreground hover:border-nav-blue hover:text-nav-blue"
+              }`}
+            >
+              {cat === "All" ? "सभी | All" : cat}
+              {filter === cat && (
+                <motion.span
+                  layoutId="filter-pill-indicator"
+                  className="absolute inset-0 rounded-full ring-2 ring-white/40"
+                />
+              )}
+            </button>
           ))}
         </motion.div>
-      )}
+
+        {/* List */}
+        {isLoading ? (
+          <div className="space-y-4" data-ocid="notifications.loading_state">
+            {[1, 2, 3, 4].map((i) => (
+              <Skeleton key={i} className="h-28 rounded-2xl" />
+            ))}
+          </div>
+        ) : filtered.length === 0 ? (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            data-ocid="notifications.empty_state"
+          >
+            <Card className="border-dashed border-2">
+              <CardContent className="py-16 text-center text-muted-foreground">
+                <Bell size={44} className="mx-auto mb-3 opacity-20" />
+                <p className="font-devanagari text-sm">कोई सूचना नहीं</p>
+                <p className="text-xs mt-1">No notifications found</p>
+              </CardContent>
+            </Card>
+          </motion.div>
+        ) : (
+          <motion.div className="space-y-4" data-ocid="notifications.list">
+            <AnimatePresence mode="popLayout">
+              {filtered.map((n, i) => {
+                const meta = CATEGORY_META[n.category] ?? CATEGORY_META.General;
+                const CatIcon = meta.icon;
+                return (
+                  <motion.div
+                    key={n.title}
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8, scale: 0.97 }}
+                    transition={{ delay: i * 0.06, duration: 0.35 }}
+                    data-ocid={`notifications.item.${i + 1}`}
+                  >
+                    <div
+                      className={`rounded-2xl border border-border border-l-4 ${meta.border} ${meta.bg} shadow-card hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-200`}
+                    >
+                      <div className="p-5">
+                        <div className="flex items-start gap-4">
+                          {/* Icon bubble */}
+                          <div
+                            className={`rounded-xl p-2.5 flex-shrink-0 ${
+                              n.category === "Alert"
+                                ? "bg-red-100"
+                                : n.category === "Event"
+                                  ? "bg-green-100"
+                                  : "bg-blue-100"
+                            }`}
+                          >
+                            <CatIcon
+                              size={20}
+                              className={
+                                n.category === "Alert"
+                                  ? "text-red-600"
+                                  : n.category === "Event"
+                                    ? "text-green-700"
+                                    : "text-blue-600"
+                              }
+                            />
+                          </div>
+
+                          <div className="flex-1 min-w-0">
+                            {/* Title row */}
+                            <div className="flex items-start justify-between gap-3 flex-wrap mb-2">
+                              <h3 className="font-bold text-sm md:text-base font-devanagari text-foreground leading-snug">
+                                {n.title}
+                              </h3>
+                              <Badge
+                                variant="outline"
+                                className={`text-xs flex-shrink-0 ${meta.badge}`}
+                              >
+                                {n.category}
+                              </Badge>
+                            </div>
+
+                            {/* Message */}
+                            <p className="text-sm text-muted-foreground font-devanagari leading-relaxed">
+                              {n.message}
+                            </p>
+
+                            {/* Date chip */}
+                            <div className="mt-3 flex items-center gap-1.5">
+                              <CalendarDays
+                                size={12}
+                                className="text-muted-foreground flex-shrink-0"
+                              />
+                              <span
+                                className={`text-xs font-medium px-2.5 py-0.5 rounded-full ${
+                                  n.category === "Alert"
+                                    ? "bg-red-100 text-red-700"
+                                    : n.category === "Event"
+                                      ? "bg-green-100 text-green-700"
+                                      : "bg-blue-100 text-blue-700"
+                                }`}
+                              >
+                                {formatDate(n.date)}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
+          </motion.div>
+        )}
+      </div>
     </main>
   );
 }
