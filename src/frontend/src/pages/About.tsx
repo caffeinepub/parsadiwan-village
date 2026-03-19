@@ -5,12 +5,6 @@ import { useVillageInfo } from "../hooks/useQueries";
 
 const WARD_MEMBERS = [
   {
-    name: "श्री रामप्रसाद यादव | Shri Ramprasad Yadav",
-    ward: "1",
-    role: "सरपंच | Sarpanch",
-    phone: "9876543210",
-  },
-  {
     name: "श्रीमती सुनीता देवी | Smt. Sunita Devi",
     ward: "1",
     role: "पंच | Panch",
@@ -23,7 +17,7 @@ const WARD_MEMBERS = [
     phone: "9876543212",
   },
   {
-    name: "श्री रामेश्वर प्रसाद | Shri Rameshwar Prasad",
+    name: "सुशीला | Sushila",
     ward: "3",
     role: "पंच | Panch",
     phone: "9876543213",
@@ -39,6 +33,60 @@ const WARD_MEMBERS = [
     ward: "5",
     role: "पंच | Panch",
     phone: "9876543215",
+  },
+  {
+    name: "श्री राजेश सिंह | Shri Rajesh Singh",
+    ward: "6",
+    role: "पंच | Panch",
+    phone: "9876543216",
+  },
+  {
+    name: "श्रीमती कमला देवी | Smt. Kamla Devi",
+    ward: "6",
+    role: "पंच | Panch",
+    phone: "9876543217",
+  },
+  {
+    name: "श्री सुरेश कुमार | Shri Suresh Kumar",
+    ward: "7",
+    role: "पंच | Panch",
+    phone: "9876543218",
+  },
+  {
+    name: "श्रीमती रेखा देवी | Smt. Rekha Devi",
+    ward: "7",
+    role: "पंच | Panch",
+    phone: "9876543219",
+  },
+  {
+    name: "श्री अजय कुमार | Shri Ajay Kumar",
+    ward: "8",
+    role: "पंच | Panch",
+    phone: "9876543220",
+  },
+  {
+    name: "श्रीमती प्रीति देवी | Smt. Preeti Devi",
+    ward: "8",
+    role: "पंच | Panch",
+    phone: "9876543221",
+  },
+  {
+    name: "श्री दिनेश यादव | Shri Dinesh Yadav",
+    ward: "9",
+    role: "पंच | Panch",
+    phone: "9876543222",
+  },
+  {
+    name: "श्री रमेश वर्मा | Shri Ramesh Verma",
+    ward: "9",
+    role: "पंच | Panch",
+    phone: "9876543223",
+  },
+  {
+    name: "श्रीमती अनीता देवी | Smt. Anita Devi",
+    ward: "10",
+    role: "पंच | Panch",
+    phone: "9876543224",
   },
 ];
 

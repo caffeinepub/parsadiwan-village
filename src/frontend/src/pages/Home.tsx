@@ -264,11 +264,9 @@ export function Home() {
                     className="w-20 h-20 rounded-full mx-auto mb-3 object-cover border-4 border-nav-orange"
                   />
                   <div className="font-bold text-base font-devanagari">
-                    श्री रामप्रसाद यादव
+                    सुशीला
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    Shri Ramprasad Yadav
-                  </div>
+                  <div className="text-sm text-muted-foreground">Sushila</div>
                   <Badge className="bg-nav-green text-white mt-2 text-xs">
                     सरपंच | Gram Panchayat
                   </Badge>
