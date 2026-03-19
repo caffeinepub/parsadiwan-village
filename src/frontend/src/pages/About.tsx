@@ -17,7 +17,7 @@ const WARD_MEMBERS = [
     phone: "9876543212",
   },
   {
-    name: "सुशीला | Sushila",
+    name: "श्रीमती सुशीला | Smt. Sushila",
     ward: "3",
     role: "पंच | Panch",
     phone: "9876543213",

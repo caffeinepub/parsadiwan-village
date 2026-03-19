@@ -295,13 +295,15 @@ export function Home() {
                 <CardContent className="pt-4 pb-4 text-center">
                   <img
                     src="/assets/generated/sarpanch-female.dim_400x400.jpg"
-                    alt="Sarpanch Sushila"
+                    alt="Sarpanch Smt. Sushila"
                     className="w-20 h-20 rounded-full mx-auto mb-3 object-cover border-4 border-nav-orange"
                   />
                   <div className="font-bold text-base font-devanagari">
-                    सुशीला
+                    श्रीमती सुशीला
                   </div>
-                  <div className="text-sm text-muted-foreground">Sushila</div>
+                  <div className="text-sm text-muted-foreground">
+                    Smt. Sushila
+                  </div>
                   <Badge className="bg-nav-green text-white mt-2 text-xs">
                     सरपंच | Gram Panchayat
                   </Badge>
