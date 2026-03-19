@@ -1,0 +1,81 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("/assets/fonts/PlusJakartaSans.woff2") format("woff2");
+  font-weight: 300 700;
+  font-display: swap;
+}
+
+:root {
+  /* Colors as raw OKLCH L C H */
+  --background: 96% 0.005 240;
+  --foreground: 15% 0.02 240;
+
+  --card: 100% 0 0;
+  --card-foreground: 15% 0.02 240;
+
+  --popover: 100% 0 0;
+  --popover-foreground: 15% 0.02 240;
+
+  --primary: 58% 0.14 50; /* orange #C8751E */
+  --primary-foreground: 100% 0 0;
+
+  --secondary: 42% 0.13 145; /* green #2E7D32 */
+  --secondary-foreground: 100% 0 0;
+
+  --accent: 56% 0.17 245; /* blue #1E88E5 */
+  --accent-foreground: 100% 0 0;
+
+  --muted: 92% 0.01 240;
+  --muted-foreground: 45% 0.02 240;
+
+  --destructive: 55% 0.22 25;
+  --destructive-foreground: 100% 0 0;
+
+  --border: 88% 0.01 240;
+  --input: 88% 0.01 240;
+  --ring: 58% 0.14 50;
+
+  --nav-orange: 58% 0.14 50;
+  --nav-green: 42% 0.13 145;
+  --nav-blue: 56% 0.17 245;
+  --footer-bg: 25% 0.06 220; /* navy #143D5A */
+
+  --radius: 0.75rem;
+}
+
+body {
+  background-color: oklch(var(--background));
+  color: oklch(var(--foreground));
+  font-family: "Plus Jakarta Sans", "Noto Sans Devanagari", sans-serif;
+}
+
+/* Ticker animation */
+@keyframes ticker-scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.ticker-scroll {
+  animation: ticker-scroll 30s linear infinite;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.ticker-scroll:hover {
+  animation-play-state: paused;
+}
+
+/* Nav tab active indicator */
+.nav-tab-active {
+  box-shadow: inset 0 -3px 0 rgba(255, 255, 255, 0.6);
+}
