@@ -115,7 +115,7 @@ export function Home() {
       <section className="relative h-80 md:h-96 overflow-hidden">
         <img
           src="/assets/generated/village-hero.dim_1200x600.jpg"
-          alt="Gram Panchayat Parsadiwan"
+          alt="Gram Panchayat Parsa Diwan"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent flex items-center">
@@ -126,10 +126,10 @@ export function Home() {
             className="px-6 md:px-12 text-white max-w-lg"
           >
             <div className="text-2xl md:text-4xl font-bold font-devanagari leading-tight mb-2">
-              ग्राम पंचायत पारसाडीवान में आपका स्वागत है
+              ग्राम पंचायत परसा दीवान में आपका स्वागत है
             </div>
             <div className="text-base md:text-lg opacity-90">
-              Welcome to Gram Panchayat Parsadiwan
+              Welcome to Gram Panchayat Parsa Diwan
             </div>
             <div className="text-sm opacity-75 mt-1">
               जिला, उत्तर प्रदेश | District, Uttar Pradesh
@@ -259,8 +259,8 @@ export function Home() {
                 </div>
                 <CardContent className="pt-4 pb-4 text-center">
                   <img
-                    src="/assets/generated/sarpanch.dim_200x200.jpg"
-                    alt="Sarpanch"
+                    src="/assets/generated/sarpanch-female.dim_400x400.jpg"
+                    alt="Sarpanch Sushila"
                     className="w-20 h-20 rounded-full mx-auto mb-3 object-cover border-4 border-nav-orange"
                   />
                   <div className="font-bold text-base font-devanagari">

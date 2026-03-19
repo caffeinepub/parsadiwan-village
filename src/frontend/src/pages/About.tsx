@@ -41,22 +41,10 @@ const WARD_MEMBERS = [
     phone: "9876543216",
   },
   {
-    name: "श्रीमती कमला देवी | Smt. Kamla Devi",
-    ward: "6",
-    role: "पंच | Panch",
-    phone: "9876543217",
-  },
-  {
     name: "श्री सुरेश कुमार | Shri Suresh Kumar",
     ward: "7",
     role: "पंच | Panch",
     phone: "9876543218",
-  },
-  {
-    name: "श्रीमती रेखा देवी | Smt. Rekha Devi",
-    ward: "7",
-    role: "पंच | Panch",
-    phone: "9876543219",
   },
   {
     name: "श्री अजय कुमार | Shri Ajay Kumar",
@@ -65,22 +53,10 @@ const WARD_MEMBERS = [
     phone: "9876543220",
   },
   {
-    name: "श्रीमती प्रीति देवी | Smt. Preeti Devi",
-    ward: "8",
-    role: "पंच | Panch",
-    phone: "9876543221",
-  },
-  {
     name: "श्री दिनेश यादव | Shri Dinesh Yadav",
     ward: "9",
     role: "पंच | Panch",
     phone: "9876543222",
-  },
-  {
-    name: "श्री रमेश वर्मा | Shri Ramesh Verma",
-    ward: "9",
-    role: "पंच | Panch",
-    phone: "9876543223",
   },
   {
     name: "श्रीमती अनीता देवी | Smt. Anita Devi",
@@ -103,7 +79,7 @@ export function About() {
         हमारे बारे में
       </motion.h1>
       <div className="text-muted-foreground mb-6">
-        About Gram Panchayat Parsadiwan
+        About Gram Panchayat Parsa Diwan
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -120,11 +96,11 @@ export function About() {
             </div>
             <CardContent className="pt-4 pb-4 space-y-3 text-sm leading-relaxed">
               <p className="font-devanagari text-base">
-                पारसाडीवान एक प्राचीन गाँव है जो उत्तर प्रदेश के हृदय में स्थित है। यह गाँव
+                परसा दीवान एक प्राचीन गाँव है जो उत्तर प्रदेश के हृदय में स्थित है। यह गाँव
                 अपनी समृद्ध सांस्कृतिक विरासत और कृषि परंपराओं के लिए जाना जाता है।
               </p>
               <p className="text-muted-foreground">
-                Parsadiwan is an ancient village situated in the heart of Uttar
+                Parsa Diwan is an ancient village situated in the heart of Uttar
                 Pradesh, known for its rich cultural heritage and agricultural
                 traditions. The village has been inhabited for centuries and
                 maintains strong community bonds.
@@ -156,7 +132,7 @@ export function About() {
                   {[
                     {
                       label: "ग्राम पंचायत | Village",
-                      value: villageInfo?.villageName ?? "Parsadiwan",
+                      value: villageInfo?.villageName ?? "Parsa Diwan",
                     },
                     {
                       label: "जिला | District",

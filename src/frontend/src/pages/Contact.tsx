@@ -40,7 +40,7 @@ export function Contact() {
       >
         <h1 className="text-2xl font-bold font-devanagari mb-1">संपर्क करें</h1>
         <div className="text-muted-foreground mb-6">
-          Contact Us — Gram Panchayat Parsadiwan
+          Contact Us — Gram Panchayat Parsa Diwan
         </div>
       </motion.div>
 
@@ -67,13 +67,16 @@ export function Contact() {
                 <div>
                   <div className="font-semibold text-sm">पता | Address</div>
                   <div className="text-sm text-muted-foreground font-devanagari">
-                    ग्राम पंचायत भवन, पारसाडीवान
+                    पंचायत भवन, ग्राम परसा दीवान, पोस्ट ढेबरुआ
                   </div>
                   <div className="text-sm text-muted-foreground">
-                    Gram Panchayat Bhavan, Parsadiwan
+                    Panchayat Bhawan, Gram Parsa Diwan, Post Dhebarua
                   </div>
                   <div className="text-sm text-muted-foreground">
-                    जनपद, उत्तर प्रदेश — 226001
+                    जिला सिद्धार्थनगर, उत्तर प्रदेश — 272201
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    District Siddharthnagar, Uttar Pradesh — 272201
                   </div>
                 </div>
               </div>
@@ -110,6 +113,9 @@ export function Contact() {
                   <div className="text-sm text-muted-foreground">
                     Mon – Sat: 10:00 AM – 5:00 PM
                   </div>
+                  <div className="text-sm font-semibold text-red-600 mt-1">
+                    रविवार: अवकाश | Sunday: Holiday
+                  </div>
                 </div>
               </div>
             </CardContent>
@@ -121,9 +127,11 @@ export function Contact() {
               <div className="text-center text-muted-foreground">
                 <MapPin size={40} className="mx-auto mb-2 text-nav-orange" />
                 <div className="font-devanagari font-semibold">
-                  पारसाडीवान, उत्तर प्रदेश
+                  परसा दीवान, सिद्धार्थनगर, उत्तर प्रदेश
                 </div>
-                <div className="text-sm">Parsadiwan, Uttar Pradesh</div>
+                <div className="text-sm">
+                  Parsa Diwan, Siddharthnagar, UP — 272201
+                </div>
               </div>
             </div>
           </Card>

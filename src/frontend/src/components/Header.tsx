@@ -39,10 +39,10 @@ export function Header() {
             </div>
             <div>
               <div className="text-foreground font-bold text-lg leading-tight font-devanagari">
-                ग्राम पंचायत पारसाडीवान
+                ग्राम पंचायत परसा दीवान
               </div>
               <div className="text-muted-foreground text-sm">
-                Gram Panchayat Parsadiwan
+                Gram Panchayat Parsa Diwan
               </div>
               <div className="text-xs text-muted-foreground">
                 जिला — उत्तर प्रदेश | District — Uttar Pradesh

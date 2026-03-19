@@ -19,11 +19,11 @@ export function Footer() {
           <div className="flex items-start gap-2 text-sm text-blue-100 mb-2">
             <MapPin size={16} className="mt-0.5 flex-shrink-0" />
             <span>
-              ग्राम पंचायत पारसाडीवान
+              ग्राम पंचायत परसा दीवान
               <br />
               जनपद, उत्तर प्रदेश — 226001
               <br />
-              Gram Panchayat Parsadiwan, UP
+              Gram Panchayat Parsa Diwan, UP
             </span>
           </div>
           <div className="flex items-center gap-2 text-sm text-blue-100 mb-1">
